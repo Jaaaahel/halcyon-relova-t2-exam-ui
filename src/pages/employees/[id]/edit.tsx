@@ -39,13 +39,21 @@ const Edit: Page = () => {
   }, [employee]);
 
   const onSubmit = async (data: Employee) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to save the changes on this employee?"
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     try {
       await api.patch(`/employees/${id}`, data);
 
       router.push(`/employees/${id}`);
     } catch (error: any) {
       if (isAxiosError(error)) {
-        if (error.code === "422") {
+        if (error.response?.status === 422) {
           const errors: FieldError[] = error.response?.data || [];
 
           errors.forEach((error) =>

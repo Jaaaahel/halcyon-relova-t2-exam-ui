@@ -19,21 +19,40 @@ export enum EmploymentStatus {
 
 export interface Employee {
   id: number;
+
   firstName: string;
+
   lastName: string;
+
   gender: string;
+
   birthDate: Date;
+
   maritalStatus: MaritalStatus;
+
   department: Department;
+
   position: string;
+
   dateHired: Date;
+
   employmentStatus: EmploymentStatus;
+
   contactNumber: string;
-  email: string;
-  address: string;
-  city: string;
-  province: string;
-  nationality: string;
+
+  email?: string;
+
+  address?: string;
+
+  city?: string;
+
+  province?: string;
+
+  nationality?: string;
+
+  avatar?: string;
+
   createdAt: Date;
+
   updatedAt: Date;
 }

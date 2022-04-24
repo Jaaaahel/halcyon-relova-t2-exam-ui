@@ -20,15 +20,17 @@ const Add: Page = () => {
     try {
       let { data: createdEmployee } = await api.post(`/employees`, data);
 
+      alert("Employee successfuly created");
+
       router.push(`/employees/${createdEmployee.id}`);
     } catch (error: any) {
       if (isAxiosError(error)) {
-        if (error.code === "422") {
-          const errors: FieldError[] = error.response?.data || [];
+        if (error.response?.status === 422) {
+          const errors: FieldError[] = error.response?.data.errors || [];
 
-          errors.forEach((error) =>
-            setError(error.field as keyof Employee, { message: error.message })
-          );
+          errors.forEach((error) => {
+            setError(error.field as keyof Employee, { message: error.message });
+          });
         }
       }
     }
